@@ -1,6 +1,8 @@
 package com.drnushooz.parkinglot;
 
-import java.util.HashMap;
+import jdk.nashorn.internal.runtime.regexp.joni.Config;
+
+import java.util.EnumMap;
 import java.util.Map;
 
 /**
@@ -15,13 +17,13 @@ public class Main
 			System.out.println("Provide server port number as first argument");
 			System.exit(-1);
 		}
-		Map<String, Integer> serverProps = new HashMap<>();
-		serverProps.put("port", Integer.valueOf(args[0]));
-		serverProps.put("maxCarSlots", 200);
-		serverProps.put("maxBikeSlots", 200);
-		serverProps.put("maxServiceThreads", 10);
-		serverProps.put("maxSockProcThreads", 5);
-		serverProps.put("maxMessageLenBytes", 50);
+		Map<ConfigParams, Integer> serverProps = new EnumMap<>(ConfigParams.class);
+		serverProps.put(ConfigParams.PORT, Integer.valueOf(args[0]));
+		serverProps.put(ConfigParams.MAX_CAR_SLOTS, 200);
+		serverProps.put(ConfigParams.MAX_BIKE_SLOTS, 200);
+		serverProps.put(ConfigParams.MAX_SERVICE_THREADS, 10);
+		serverProps.put(ConfigParams.MAX_SOCK_PROC_THREADS, 5);
+		serverProps.put(ConfigParams.MAX_MESSAGE_LEN_BYTES, 50);
 
 		ServerEntry serverEntry = new ServerEntry(serverProps);
 		Thread serverThread = new Thread(serverEntry);

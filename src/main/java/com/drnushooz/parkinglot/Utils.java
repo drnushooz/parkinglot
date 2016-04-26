@@ -10,6 +10,12 @@ import java.nio.charset.StandardCharsets;
 /**
  * Created by abhinav on 4/24/16.
  */
+
+enum ConfigParams
+{
+    PORT,MAX_CAR_SLOTS,MAX_BIKE_SLOTS,MAX_SERVICE_THREADS,MAX_SOCK_PROC_THREADS,MAX_MESSAGE_LEN_BYTES;
+}
+
 public abstract class Utils
 {
 	static void sendMessageAndClose(final SocketChannel inputSockChannel, final String message)

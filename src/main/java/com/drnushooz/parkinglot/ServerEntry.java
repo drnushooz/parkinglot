@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class ServerEntry implements Runnable
 {
-	public static Map<String, Integer> serverSettings;
+	public static Map<ConfigParams, Integer> serverSettings;
 	public static int MAX_CAR_SLOTS, MAX_BIKE_SLOTS;
 	private static int PORT;
 	private Selector serverSelector;
@@ -28,16 +28,16 @@ public class ServerEntry implements Runnable
 	private ExecutorService parkUnparkService, socketProcessorService;
 	private ServerSocketChannel serverSocketChannel;
 
-	public ServerEntry(final Map<String, Integer> props)
+	public ServerEntry(final Map<ConfigParams, Integer> props)
 	{
 		serverSettings = props;
 		carSlots = new ConcurrentHashMap<>();
 		bikeSlots = new ConcurrentHashMap<>();
-		PORT = props.get("port");
-		MAX_BIKE_SLOTS = props.get("maxBikeSlots");
-		MAX_CAR_SLOTS = props.get("maxCarSlots");
-		socketProcessorService = Executors.newFixedThreadPool(props.get("maxSockProcThreads"));
-		parkUnparkService = Executors.newFixedThreadPool(props.get("maxServiceThreads"));
+		PORT = props.get(ConfigParams.PORT);
+		MAX_BIKE_SLOTS = props.get(ConfigParams.MAX_BIKE_SLOTS);
+		MAX_CAR_SLOTS = props.get(ConfigParams.MAX_CAR_SLOTS);
+		socketProcessorService = Executors.newFixedThreadPool(props.get(ConfigParams.MAX_SOCK_PROC_THREADS));
+		parkUnparkService = Executors.newFixedThreadPool(props.get(ConfigParams.MAX_SERVICE_THREADS));
 
 		try
 		{

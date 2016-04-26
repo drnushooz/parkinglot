@@ -25,13 +25,13 @@ public class SocketProcessor implements Runnable
 	public SocketProcessor(SocketChannel inputSockChannel, ExecutorService parkUnparkService,
 						   ConcurrentHashMap<String, Vehicle> carSlots,
 						   ConcurrentHashMap<String, Vehicle> bikeSlots,
-						   Map<String, Integer> serverSettings)
+						   Map<ConfigParams, Integer> serverSettings)
 	{
 		this.inputSockChannel = inputSockChannel;
 		this.parkUnparkService = parkUnparkService;
 		this.carSlots = carSlots;
 		this.bikeSlots = bikeSlots;
-		MAX_MESSAGE_LENGTH = serverSettings.get("maxMessageLenBytes");
+		MAX_MESSAGE_LENGTH = serverSettings.get(ConfigParams.MAX_MESSAGE_LEN_BYTES);
 	}
 
 	public void run()
